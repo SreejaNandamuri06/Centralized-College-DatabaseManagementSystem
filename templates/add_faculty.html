@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Add Faculty{% endblock %}
+{% block page_title %}Add Faculty{% endblock %}
+{% block page_subtitle %}Create a new faculty profile and login access{% endblock %}
+{% block content %}
+<div class="content-card form-card">
+    <form method="POST">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <input type="text" class="form-control" name="phone" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Designation</label>
+                <input type="text" class="form-control" name="designation" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Department</label>
+                <select class="form-select" name="department_id" required>
+                    <option value="">Select Department</option>
+                    {% for dept in departments %}
+                    <option value="{{ dept.DepartmentID }}">{{ dept.DepartmentName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Login Username</label>
+                <input type="text" class="form-control" name="username" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Login Password</label>
+                <input type="text" class="form-control" name="password" required>
+            </div>
+        </div>
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Save Faculty</button>
+            <a href="{{ url_for('faculty') }}" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

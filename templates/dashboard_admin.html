@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block page_title %}Admin Dashboard{% endblock %}
+{% block page_subtitle %}Overview of students, faculty, courses, and recent activity{% endblock %}
+{% block content %}
+<div class="hero-banner mb-4">
+    <div>
+        <div class="hero-eyebrow">Administration Center</div>
+        <h2>Hello, Admin 👋</h2>
+        <p>Use the quick actions below to manage students, faculty, and academics in one place.</p>
+    </div>
+    <div class="hero-actions">
+        <a href="{{ url_for('add_student') }}" class="btn btn-light">Add Student</a>
+        <a href="{{ url_for('add_faculty') }}" class="btn btn-outline-light">Add Faculty</a>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6 col-xl-3"><div class="metric-card"><div class="metric-icon blue"><i class="bi bi-people-fill"></i></div><div><div class="metric-value">{{ stats.students }}</div><div class="metric-label">Students</div></div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="metric-card"><div class="metric-icon purple"><i class="bi bi-person-badge-fill"></i></div><div><div class="metric-value">{{ stats.faculty }}</div><div class="metric-label">Faculty</div></div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="metric-card"><div class="metric-icon green"><i class="bi bi-journal-bookmark-fill"></i></div><div><div class="metric-value">{{ stats.courses }}</div><div class="metric-label">Courses</div></div></div></div>
+    <div class="col-md-6 col-xl-3"><div class="metric-card"><div class="metric-icon orange"><i class="bi bi-building-fill"></i></div><div><div class="metric-value">{{ stats.departments }}</div><div class="metric-label">Departments</div></div></div></div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="content-card h-100">
+            <div class="section-header"><h5>Department Snapshot</h5><span class="section-badge">Live Data</span></div>
+            <div class="table-responsive">
+                <table class="table clean-table align-middle">
+                    <thead><tr><th>Department</th><th>Students</th><th>Faculty</th></tr></thead>
+                    <tbody>
+                        {% for row in departments %}
+                        <tr><td>{{ row.DepartmentName }}</td><td>{{ row.student_count }}</td><td>{{ row.faculty_count }}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="content-card h-100">
+            <div class="section-header"><h5>Quick Actions</h5></div>
+            <div class="quick-link-list">
+                <a href="{{ url_for('students') }}" class="quick-link-item"><i class="bi bi-arrow-right-circle"></i><span>View all students</span></a>
+                <a href="{{ url_for('faculty') }}" class="quick-link-item"><i class="bi bi-arrow-right-circle"></i><span>View all faculty</span></a>
+                <a href="{{ url_for('courses') }}" class="quick-link-item"><i class="bi bi-arrow-right-circle"></i><span>View courses</span></a>
+                <a href="{{ url_for('results') }}" class="quick-link-item"><i class="bi bi-arrow-right-circle"></i><span>Check results</span></a>
+            </div>
+            <hr>
+            <h6 class="mb-3">Recently Added Students</h6>
+            {% for item in recent_students %}
+                <div class="mini-row">
+                    <div>
+                        <strong>{{ item.StudentName }}</strong>
+                        <div class="mini-muted">{{ item.DepartmentName }}</div>
+                    </div>
+                    <span class="mini-chip">{{ item.EnrollmentYear }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

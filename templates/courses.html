@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Courses{% endblock %}
+{% block page_title %}Courses{% endblock %}
+{% block page_subtitle %}Course directory and academic offerings{% endblock %}
+{% block content %}
+<div class="content-card">
+    <div class="section-header"><h5>Course List</h5></div>
+    <div class="table-responsive">
+        <table class="table clean-table align-middle">
+            <thead><tr><th>ID</th><th>Course</th><th>Code</th><th>Credits</th><th>Department</th><th>Faculty</th></tr></thead>
+            <tbody>
+            {% for course in courses %}
+                <tr>
+                    <td>{{ course.CourseID }}</td>
+                    <td>{{ course.CourseName }}</td>
+                    <td>{{ course.CourseCode }}</td>
+                    <td>{{ course.Credits }}</td>
+                    <td>{{ course.DepartmentName }}</td>
+                    <td>{{ course.FacultyName }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

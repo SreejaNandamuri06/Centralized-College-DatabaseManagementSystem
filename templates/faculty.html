@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Faculty{% endblock %}
+{% block page_title %}Faculty Directory{% endblock %}
+{% block page_subtitle %}View and manage faculty records{% endblock %}
+{% block content %}
+<div class="content-card">
+    <div class="section-header">
+        <h5>Faculty Members</h5>
+        {% if session.get('role') == 'admin' %}
+        <a href="{{ url_for('add_faculty') }}" class="btn btn-primary btn-sm">Add Faculty</a>
+        {% endif %}
+    </div>
+    <div class="table-responsive">
+        <table class="table clean-table align-middle">
+            <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Designation</th><th>Department</th></tr></thead>
+            <tbody>
+                {% for item in faculty_members %}
+                <tr>
+                    <td>{{ item.FacultyID }}</td>
+                    <td>{{ item.FirstName }} {{ item.LastName }}</td>
+                    <td>{{ item.Email }}</td>
+                    <td>{{ item.Phone }}</td>
+                    <td>{{ item.Designation }}</td>
+                    <td>{{ item.DepartmentName }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

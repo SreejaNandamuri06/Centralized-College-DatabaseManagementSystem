@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+{% block page_title %}Student Dashboard{% endblock %}
+{% block page_subtitle %}Your academic summary{% endblock %}
+{% block content %}
+<div class="hero-banner mb-4 student-hero">
+    <div class="student-hero-inner">
+        <div class="avatar-large">{{ student.FirstName[0] }}{{ student.LastName[0] }}</div>
+        <div>
+            <h2>Hello, {{ student.FirstName }} {{ student.LastName }}! 👋</h2>
+            <p>{{ student.DepartmentName }} • Enrolled Courses: {{ course_count }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-6 col-xl-3"><a href="{{ url_for('courses') }}" class="action-card-link"><div class="action-card"><div class="metric-icon blue"><i class="bi bi-journal-bookmark-fill"></i></div><div><div class="action-title">{{ course_count }}</div><div class="metric-label">Enrolled Courses</div></div></div></a></div>
+    <div class="col-md-6 col-xl-3"><a href="{{ url_for('attendance') }}" class="action-card-link"><div class="action-card"><div class="metric-icon green"><i class="bi bi-calendar-check-fill"></i></div><div><div class="action-title">View</div><div class="metric-label">My Attendance</div></div></div></a></div>
+    <div class="col-md-6 col-xl-3"><a href="{{ url_for('results') }}" class="action-card-link"><div class="action-card"><div class="metric-icon purple"><i class="bi bi-award-fill"></i></div><div><div class="action-title">View</div><div class="metric-label">My Results</div></div></div></a></div>
+    <div class="col-md-6 col-xl-3"><a href="{{ url_for('profile') }}" class="action-card-link"><div class="action-card"><div class="metric-icon orange"><i class="bi bi-person-fill"></i></div><div><div class="action-title">View</div><div class="metric-label">My Profile</div></div></div></a></div>
+</div>
+
+<div class="content-card mb-4">
+    <div class="section-header">
+        <h5>Profile Summary</h5>
+        <a href="{{ url_for('profile') }}" class="btn btn-sm btn-outline-primary">View Full Profile</a>
+    </div>
+    <div class="detail-grid">
+        <div class="detail-box"><small>Student ID</small><strong>#{{ student.StudentID }}</strong></div>
+        <div class="detail-box"><small>Full Name</small><strong>{{ student.FirstName }} {{ student.LastName }}</strong></div>
+        <div class="detail-box"><small>Email</small><strong>{{ student.Email }}</strong></div>
+        <div class="detail-box"><small>Department</small><strong>{{ student.DepartmentName }}</strong></div>
+        <div class="detail-box"><small>Enrollment Year</small><strong>{{ student.EnrollmentYear }}</strong></div>
+        <div class="detail-box"><small>Phone</small><strong>{{ student.Phone }}</strong></div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="content-card h-100">
+            <div class="section-header"><h5>Attendance Overview</h5></div>
+            {% for item in attendance %}
+            <div class="mini-row">
+                <div>
+                    <strong>{{ item.CourseName }}</strong>
+                    <div class="mini-muted">Attendance Percentage</div>
+                </div>
+                <span class="mini-chip success-chip">{{ item.attendance_percentage }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="content-card h-100">
+            <div class="section-header"><h5>Result Snapshot</h5><span class="section-badge">Avg: {{ average_marks }}</span></div>
+            <div class="table-responsive">
+                <table class="table clean-table align-middle">
+                    <thead><tr><th>Course</th><th>Marks</th><th>Grade</th></tr></thead>
+                    <tbody>
+                    {% for row in results %}
+                    <tr>
+                        <td>{{ row.CourseCode }}</td>
+                        <td>{{ row.Marks }}</td>
+                        <td>{{ row.Grade }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

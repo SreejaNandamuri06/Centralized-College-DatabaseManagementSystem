@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Results{% endblock %}
+{% block page_title %}Results{% endblock %}
+{% block page_subtitle %}Student marks and grades{% endblock %}
+{% block content %}
+<div class="content-card">
+    <div class="section-header"><h5>Result Records</h5></div>
+    <div class="table-responsive">
+        <table class="table clean-table align-middle">
+            <thead>
+                <tr>
+                    {% if role != 'student' %}<th>Student</th>{% endif %}
+                    <th>Course</th>
+                    <th>Code</th>
+                    <th>Marks</th>
+                    <th>Grade</th>
+                    <th>Semester</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in result_rows %}
+                <tr>
+                    {% if role != 'student' %}<td>{{ row.StudentName }}</td>{% endif %}
+                    <td>{{ row.CourseName }}</td>
+                    <td>{{ row.CourseCode }}</td>
+                    <td>{{ row.Marks }}</td>
+                    <td>{{ row.Grade }}</td>
+                    <td>{{ row.Semester }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

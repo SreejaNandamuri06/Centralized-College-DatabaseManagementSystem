@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Attendance{% endblock %}
+{% block page_title %}Attendance{% endblock %}
+{% block page_subtitle %}Daily attendance records{% endblock %}
+{% block content %}
+<div class="content-card">
+    <div class="section-header"><h5>Attendance Records</h5></div>
+    <div class="table-responsive">
+        <table class="table clean-table align-middle">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    {% if role != 'student' %}<th>Student</th>{% endif %}
+                    <th>Course</th>
+                    <th>Code</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in attendance_rows %}
+                <tr>
+                    <td>{{ row.Date }}</td>
+                    {% if role != 'student' %}<td>{{ row.StudentName }}</td>{% endif %}
+                    <td>{{ row.CourseName }}</td>
+                    <td>{{ row.CourseCode }}</td>
+                    <td><span class="mini-chip {% if row.Status == 'Present' %}success-chip{% else %}danger-chip{% endif %}">{{ row.Status }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Faculty Dashboard{% endblock %}
+{% block page_title %}Faculty Dashboard{% endblock %}
+{% block page_subtitle %}Manage your courses and monitor student academic data{% endblock %}
+{% block content %}
+<div class="hero-banner mb-4 faculty-hero">
+    <div>
+        <div class="hero-eyebrow">Faculty Workspace</div>
+        <h2>{{ faculty.FirstName }} {{ faculty.LastName }}</h2>
+        <p>{{ faculty.Designation }} • {{ faculty.DepartmentName }}</p>
+    </div>
+    <div class="hero-stat-stack">
+        <div><strong>{{ summary.course_count }}</strong><span>Courses</span></div>
+        <div><strong>{{ summary.student_total }}</strong><span>Students</span></div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="content-card h-100">
+            <div class="section-header"><h5>Profile</h5></div>
+            <div class="detail-grid single-col">
+                <div class="detail-box"><small>Name</small><strong>{{ faculty.FirstName }} {{ faculty.LastName }}</strong></div>
+                <div class="detail-box"><small>Email</small><strong>{{ faculty.Email }}</strong></div>
+                <div class="detail-box"><small>Phone</small><strong>{{ faculty.Phone }}</strong></div>
+                <div class="detail-box"><small>Department</small><strong>{{ faculty.DepartmentName }}</strong></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="content-card h-100">
+            <div class="section-header"><h5>Assigned Courses</h5></div>
+            <div class="table-responsive">
+                <table class="table clean-table align-middle">
+                    <thead><tr><th>Code</th><th>Course</th><th>Credits</th><th>Students</th></tr></thead>
+                    <tbody>
+                    {% for course in courses %}
+                        <tr>
+                            <td>{{ course.CourseCode }}</td>
+                            <td>{{ course.CourseName }}</td>
+                            <td>{{ course.Credits }}</td>
+                            <td><span class="mini-chip">{{ course.student_count }}</span></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

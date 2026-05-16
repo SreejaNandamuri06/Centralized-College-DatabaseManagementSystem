@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block page_title %}My Profile{% endblock %}
+{% block page_subtitle %}Personal and academic information{% endblock %}
+{% block content %}
+<div class="content-card">
+    <div class="section-header"><h5>Profile Details</h5></div>
+    <div class="detail-grid">
+        <div class="detail-box"><small>ID</small><strong>#{{ profile.EntityID }}</strong></div>
+        <div class="detail-box"><small>Full Name</small><strong>{{ profile.FirstName }} {{ profile.LastName }}</strong></div>
+        <div class="detail-box"><small>Email</small><strong>{{ profile.Email }}</strong></div>
+        {% if role == 'student' %}
+            <div class="detail-box"><small>Department</small><strong>{{ profile.DepartmentName }}</strong></div>
+            <div class="detail-box"><small>Enrollment Year</small><strong>{{ profile.EnrollmentYear }}</strong></div>
+            <div class="detail-box"><small>Phone</small><strong>{{ profile.Phone }}</strong></div>
+        {% elif role == 'faculty' %}
+            <div class="detail-box"><small>Department</small><strong>{{ profile.DepartmentName }}</strong></div>
+            <div class="detail-box"><small>Designation</small><strong>{{ profile.Designation }}</strong></div>
+            <div class="detail-box"><small>Phone</small><strong>{{ profile.Phone }}</strong></div>
+        {% else %}
+            <div class="detail-box"><small>Role</small><strong>Administrator</strong></div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
