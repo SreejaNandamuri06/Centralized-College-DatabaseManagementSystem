@@ -25,3 +25,5 @@ python3 app.py
 - Student, faculty, and admin login
 - Profile page
 - Better layout inspired by your reference image
+Live Deployment
+https://centralized-college.onrender.com
